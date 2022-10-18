@@ -700,7 +700,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1328464510}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-        m_MethodName: BtnInventoryMax
+        m_MethodName: OnPlusInventoryMax
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1033,7 +1033,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1328464510}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-        m_MethodName: BtnArmorShow
+        m_MethodName: OnCategoriArmor
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1636,11 +1636,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1328464510}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-        m_MethodName: BtnCreatWeaponItem
-        m_Mode: 2
+        m_MethodName: OnCreatWeapon
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: -5402645545813976748, guid: a7ffef7f66cce78418b4f90486b319a9, type: 3}
-          m_ObjectArgumentAssemblyTypeName: ItemManager, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1810,7 +1810,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1328464510}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-        m_MethodName: BtnSort
+        m_MethodName: OnSort
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1953,7 +1953,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 123/123
+  m_text: 0/10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2570,15 +2570,122 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17f45632c76c9694ebda633f02453141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 7841851656145411515, guid: a7ffef7f66cce78418b4f90486b319a9, type: 3}
-  parent: {fileID: 1644856216}
+  weaponitemDatas:
+  - itemType: 0
+    itemRank: 0
+    itemPart: -1
+    itemCode: 0
+    isEquipped: 0
+  - itemType: 0
+    itemRank: 1
+    itemPart: -1
+    itemCode: 1
+    isEquipped: 0
+  - itemType: 0
+    itemRank: 2
+    itemPart: -1
+    itemCode: 2
+    isEquipped: 0
+  armoritemDatas:
+  - itemType: 1
+    itemRank: 0
+    itemPart: 0
+    itemCode: 0
+    isEquipped: 0
+  - itemType: 1
+    itemRank: 0
+    itemPart: 1
+    itemCode: 1
+    isEquipped: 0
+  - itemType: 1
+    itemRank: 0
+    itemPart: 2
+    itemCode: 2
+    isEquipped: 0
+  - itemType: 1
+    itemRank: 0
+    itemPart: 3
+    itemCode: 3
+    isEquipped: 0
+  - itemType: 1
+    itemRank: 0
+    itemPart: 4
+    itemCode: 4
+    isEquipped: 0
+  - itemType: 1
+    itemRank: 0
+    itemPart: 5
+    itemCode: 5
+    isEquipped: 0
+  - itemType: 1
+    itemRank: 1
+    itemPart: 0
+    itemCode: 6
+    isEquipped: 0
+  - itemType: 1
+    itemRank: 1
+    itemPart: 1
+    itemCode: 7
+    isEquipped: 0
+  - itemType: 1
+    itemRank: 1
+    itemPart: 2
+    itemCode: 8
+    isEquipped: 0
+  - itemType: 1
+    itemRank: 1
+    itemPart: 3
+    itemCode: 9
+    isEquipped: 0
+  - itemType: 1
+    itemRank: 1
+    itemPart: 4
+    itemCode: 10
+    isEquipped: 0
+  - itemType: 1
+    itemRank: 1
+    itemPart: 5
+    itemCode: 11
+    isEquipped: 0
+  - itemType: 1
+    itemRank: 2
+    itemPart: 0
+    itemCode: 12
+    isEquipped: 0
+  - itemType: 1
+    itemRank: 2
+    itemPart: 1
+    itemCode: 13
+    isEquipped: 0
+  - itemType: 1
+    itemRank: 2
+    itemPart: 2
+    itemCode: 14
+    isEquipped: 0
+  - itemType: 1
+    itemRank: 2
+    itemPart: 3
+    itemCode: 15
+    isEquipped: 0
+  - itemType: 1
+    itemRank: 2
+    itemPart: 4
+    itemCode: 16
+    isEquipped: 0
+  - itemType: 1
+    itemRank: 2
+    itemPart: 5
+    itemCode: 17
+    isEquipped: 0
   inventoryCountText: {fileID: 1168754492}
-  buttons:
+  slotPrefab: {fileID: 7841851656145411515, guid: a7ffef7f66cce78418b4f90486b319a9, type: 3}
+  parent: {fileID: 1644856216}
+  buttonsCategori:
   - {fileID: 1781896160}
   - {fileID: 1867763521}
   - {fileID: 643471939}
-  inventory: []
-  showMode: 0
+  buttonDelete: {fileID: 1715950672}
+  isChoose: 0
 --- !u!1 &1439159231
 GameObject:
   m_ObjectHideFlags: 0
@@ -3101,7 +3208,7 @@ GameObject:
   - component: {fileID: 1715950673}
   - component: {fileID: 1715950672}
   m_Layer: 5
-  m_Name: 'Button : Sell'
+  m_Name: 'Button : Delete'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3170,7 +3277,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1715950673}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1328464510}
+        m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
+        m_MethodName: OnDelete
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1715950673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3294,7 +3413,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1328464510}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-        m_MethodName: BtnAllShow
+        m_MethodName: OnCategoriAll
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3427,11 +3546,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1328464510}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-        m_MethodName: BtnCreatArmorItem
-        m_Mode: 2
+        m_MethodName: OnCreatArmor
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: -5402645545813976748, guid: a7ffef7f66cce78418b4f90486b319a9, type: 3}
-          m_ObjectArgumentAssemblyTypeName: ItemManager, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3635,7 +3754,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1328464510}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-        m_MethodName: BtnWeaponShow
+        m_MethodName: OnCategoriWeapon
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
