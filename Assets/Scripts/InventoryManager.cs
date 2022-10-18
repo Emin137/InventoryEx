@@ -47,6 +47,15 @@ public class InventoryManager : MonoBehaviour
         public int itemCode;
     }
 
+    public enum Categori
+    {
+        All,
+        Weapon,
+        Armor
+    }
+
+    private Categori categori;
+
     [SerializeField]
     List<ItemData> weaponitemDatas;
     [SerializeField]
@@ -89,7 +98,8 @@ public class InventoryManager : MonoBehaviour
             {
                 item = weaponitemDatas[2];
             }
-            itemSlots[inventoryCount].gameObject.SetActive(true);
+            if (categori != Categori.Armor)
+                itemSlots[inventoryCount].gameObject.SetActive(true);
             itemSlots[inventoryCount].SetSlot(item);
             inventoryCount++;
             RefreshInventoryCount();
@@ -115,7 +125,8 @@ public class InventoryManager : MonoBehaviour
             {
                 item = armoritemDatas[rand2 + 12];
             }
-            itemSlots[inventoryCount].gameObject.SetActive(true);
+            if (categori != Categori.Weapon)
+                itemSlots[inventoryCount].gameObject.SetActive(true);
             itemSlots[inventoryCount].SetSlot(item);
             inventoryCount++;
             RefreshInventoryCount();
@@ -139,6 +150,7 @@ public class InventoryManager : MonoBehaviour
 
     public void OnCategoriAll()
     {
+        categori = Categori.All;
         buttonsCategori[0].interactable = false;
         buttonsCategori[1].interactable = true;
         buttonsCategori[2].interactable = true;
@@ -151,6 +163,7 @@ public class InventoryManager : MonoBehaviour
 
     public void OnCategoriWeapon()
     {
+        categori = Categori.Weapon;
         buttonsCategori[0].interactable = true;
         buttonsCategori[1].interactable = false;
         buttonsCategori[2].interactable = true;
@@ -165,6 +178,7 @@ public class InventoryManager : MonoBehaviour
 
     public void OnCategoriArmor()
     {
+        categori = Categori.Armor;
         buttonsCategori[0].interactable = true;
         buttonsCategori[1].interactable = true;
         buttonsCategori[2].interactable = false;
