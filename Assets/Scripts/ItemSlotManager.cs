@@ -14,6 +14,7 @@ public class ItemSlotManager : MonoBehaviour
     public InventoryManager.ItemData itemData;
     public bool isChoose = false;
     public bool isRight = false;
+    public bool isEquip = false;
 
     private void Update()
     {
@@ -42,8 +43,11 @@ public class ItemSlotManager : MonoBehaviour
         }
         else
         {
-            isChoose = !isChoose;
-            gameObjectToggle.SetActive(true);
+            if (!isEquip)
+            {
+                isChoose = !isChoose;
+                gameObjectToggle.SetActive(true);
+            }
         }
         InventoryManager.instance.CheckSlotChoose();
     }
@@ -52,9 +56,9 @@ public class ItemSlotManager : MonoBehaviour
     {
         if (isRight)
         {
-            if (itemData.isEquip)
+            if (isEquip)
             {
-                itemData.isEquip = false;
+                isEquip = false;
                 gameObjectEquip.SetActive(false);
             }
             else
@@ -63,11 +67,11 @@ public class ItemSlotManager : MonoBehaviour
                 {
                     if (item.itemData.itemPart == itemData.itemPart)
                     {
-                        item.itemData.isEquip = false;
+                        item.isEquip = false;
                         item.gameObjectEquip.SetActive(false);
                     }
                 }
-                itemData.isEquip = true;
+                isEquip = true;
                 gameObjectEquip.SetActive(true);
             }
             

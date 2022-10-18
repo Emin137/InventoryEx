@@ -45,7 +45,6 @@ public class InventoryManager : MonoBehaviour
         public ItemRank itemRank;
         public ItemPart itemPart;
         public int itemCode;
-        public bool isEquip;
     }
 
     public enum Categori
