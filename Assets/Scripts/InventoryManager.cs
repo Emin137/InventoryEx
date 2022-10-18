@@ -45,6 +45,7 @@ public class InventoryManager : MonoBehaviour
         public ItemRank itemRank;
         public ItemPart itemPart;
         public int itemCode;
+        public bool isEquip;
     }
 
     public enum Categori
@@ -61,28 +62,33 @@ public class InventoryManager : MonoBehaviour
     [SerializeField]
     List<ItemData> armoritemDatas;
 
-    List<ItemSlotManager> itemSlots = new List<ItemSlotManager>();
+    public List<ItemSlotManager> itemSlots = new List<ItemSlotManager>();
 
     [SerializeField] TMP_Text inventoryCountText;
     [SerializeField] GameObject slotPrefab;
     [SerializeField] Transform parent;
     [SerializeField] Button[] buttonsCategori;
     [SerializeField] Button buttonDelete;
+    [SerializeField] TMP_Text moneyText;
 
     private int inventoryCount = 0;
     private int inventoryMax = 0;
+    private int money;
     public bool isChoose;
+    public bool isSort;
 
     private void Start()
     {
+        money = 12000;
         OnAddInventoryMax();
         OnCategoriAll();
         buttonDelete.interactable = false;
+        RefreshMoney();
     }
 
     public void OnCreatWeapon()
     {
-        if (inventoryCount < inventoryMax)
+        if (inventoryCount < inventoryMax && money>=1000)
         {
             ItemData item = new ItemData();
             int rand = Random.Range(0, 10);
@@ -103,12 +109,15 @@ public class InventoryManager : MonoBehaviour
             itemSlots[inventoryCount].SetSlot(item);
             inventoryCount++;
             RefreshInventoryCount();
+            money -= 1000;
+            RefreshMoney();
+            isSort = false;
         }
     }
 
     public void OnCreatArmor()
     {
-        if (inventoryCount < inventoryMax)
+        if (inventoryCount < inventoryMax && money>=500)
         {
             ItemData item = new ItemData();
             int rand = Random.Range(0, 10);
@@ -130,6 +139,9 @@ public class InventoryManager : MonoBehaviour
             itemSlots[inventoryCount].SetSlot(item);
             inventoryCount++;
             RefreshInventoryCount();
+            money -= 500;
+            RefreshMoney();
+            isSort = false;
         }
     }
 
@@ -138,22 +150,38 @@ public class InventoryManager : MonoBehaviour
         inventoryCountText.text = $"{inventoryCount}/{inventoryMax}";
     }
 
+    public void RefreshMoney()
+    {
+        if (money == 0)
+            moneyText.text = 0.ToString();
+        else
+            moneyText.text = string.Format("{0:#,###}", money);
+    }
+
     public void OnAddInventoryMax()
     {
-        inventoryMax += 10;
-        for (int i = 0; i < 10; i++)
+        if (money >= 2000)
         {
-            itemSlots.Add(Instantiate(slotPrefab, parent).GetComponent<ItemSlotManager>());
+            inventoryMax += 10;
+            for (int i = 0; i < 10; i++)
+            {
+                itemSlots.Add(Instantiate(slotPrefab, parent).GetComponent<ItemSlotManager>());
+            }
+            RefreshInventoryCount();
+            money -= 2000;
+            RefreshMoney();
         }
-        RefreshInventoryCount();
+    }
+
+    public void OnAddMoney()
+    {
+        money += 10000;
+        RefreshMoney();
     }
 
     public void OnCategoriAll()
     {
         categori = Categori.All;
-        buttonsCategori[0].interactable = false;
-        buttonsCategori[1].interactable = true;
-        buttonsCategori[2].interactable = true;
         foreach (var item in itemSlots)
         {
             if (item.itemData.itemType != ItemData.ItemType.Null)
@@ -164,9 +192,6 @@ public class InventoryManager : MonoBehaviour
     public void OnCategoriWeapon()
     {
         categori = Categori.Weapon;
-        buttonsCategori[0].interactable = true;
-        buttonsCategori[1].interactable = false;
-        buttonsCategori[2].interactable = true;
         foreach (var item in itemSlots)
         {
             if(item.itemData.itemType == ItemData.ItemType.Weapon)
@@ -179,9 +204,6 @@ public class InventoryManager : MonoBehaviour
     public void OnCategoriArmor()
     {
         categori = Categori.Armor;
-        buttonsCategori[0].interactable = true;
-        buttonsCategori[1].interactable = true;
-        buttonsCategori[2].interactable = false;
         foreach (var item in itemSlots)
         {
             if (item.itemData.itemType == ItemData.ItemType.Armor)
@@ -207,14 +229,28 @@ public class InventoryManager : MonoBehaviour
         inventoryCount -= deleteCount;
         RefreshInventoryCount();
         buttonDelete.interactable = false;
+        isSort = false;
     }
 
     public void OnSort()
     {
-        itemSlots = itemSlots.OrderBy(x => x.itemData.itemRank).ThenBy(x => x.itemData.itemPart).ToList();
-        foreach (var item in itemSlots)
+        if (!isSort)
         {
-            item.transform.SetAsLastSibling();
+            itemSlots = itemSlots.OrderBy(x => x.itemData.itemRank).ThenBy(x => x.itemData.itemPart).ToList();
+            foreach (var item in itemSlots)
+            {
+                item.transform.SetAsLastSibling();
+            }
+            isSort = true;
+        }
+        else
+        {
+            itemSlots = itemSlots.OrderBy(x => x.itemData.itemRank).ThenBy(x => x.itemData.itemPart).ToList();
+            foreach (var item in itemSlots)
+            {
+                item.transform.SetAsFirstSibling();
+            }
+            isSort = false;
         }
     }
 
