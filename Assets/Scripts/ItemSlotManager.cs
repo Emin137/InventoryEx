@@ -13,7 +13,7 @@ public class ItemSlotManager : MonoBehaviour
     public InventoryManager.ItemData itemData;
     public bool isChoose = false;
 
-    public void SlotRefresh(InventoryManager.ItemData _itemData)
+    public void SetSlot(InventoryManager.ItemData _itemData)
     {
         itemData = _itemData;
         imageSlot.sprite = Resources.Load<Sprite>($"Sprites/{itemData.itemType}/{itemData.itemCode}");

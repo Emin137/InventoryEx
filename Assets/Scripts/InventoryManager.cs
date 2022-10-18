@@ -51,6 +51,7 @@ public class InventoryManager : MonoBehaviour
     List<ItemData> weaponitemDatas;
     [SerializeField]
     List<ItemData> armoritemDatas;
+
     List<ItemSlotManager> itemSlots = new List<ItemSlotManager>();
 
     [SerializeField] TMP_Text inventoryCountText;
@@ -65,7 +66,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
-        OnPlusInventoryMax();
+        OnAddInventoryMax();
         OnCategoriAll();
         buttonDelete.interactable = false;
     }
@@ -89,7 +90,7 @@ public class InventoryManager : MonoBehaviour
                 item = weaponitemDatas[2];
             }
             itemSlots[inventoryCount].gameObject.SetActive(true);
-            itemSlots[inventoryCount].SlotRefresh(item);
+            itemSlots[inventoryCount].SetSlot(item);
             inventoryCount++;
             RefreshInventoryCount();
         }
@@ -115,7 +116,7 @@ public class InventoryManager : MonoBehaviour
                 item = armoritemDatas[rand2 + 12];
             }
             itemSlots[inventoryCount].gameObject.SetActive(true);
-            itemSlots[inventoryCount].SlotRefresh(item);
+            itemSlots[inventoryCount].SetSlot(item);
             inventoryCount++;
             RefreshInventoryCount();
         }
@@ -126,7 +127,7 @@ public class InventoryManager : MonoBehaviour
         inventoryCountText.text = $"{inventoryCount}/{inventoryMax}";
     }
 
-    public void OnPlusInventoryMax()
+    public void OnAddInventoryMax()
     {
         inventoryMax += 10;
         for (int i = 0; i < 10; i++)
@@ -176,7 +177,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void OnDelete()
+    public void OnSell()
     {
         int deleteCount = 0;
         for (int i = itemSlots.Count-1; i >= 0; i--)
@@ -191,6 +192,7 @@ public class InventoryManager : MonoBehaviour
         }
         inventoryCount -= deleteCount;
         RefreshInventoryCount();
+        buttonDelete.interactable = false;
     }
 
     public void OnSort()
